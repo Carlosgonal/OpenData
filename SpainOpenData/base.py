@@ -26,10 +26,10 @@ pp = pprint.PrettyPrinter()
 class SpainOpenData():
     ENDPOINT_API = "https://datos.gob.es/apidata/{url}"
 
-    def __init__(self, call_name=None, path=[], *args, **kwargs):
+    def __init__(self, *args, **kwargs):
 
-        self._path = path
-        self._call_name = call_name
+        self._path = []
+        self._call_name = ''
 
     def __getattr__(self, name):
         name = name.replace('_', '-')
@@ -55,23 +55,12 @@ class SpainOpenData():
         self._path = []
         return response.json()['result']['items']
 
+    def get_dataset(self, dataset_id, sep=','):
+        url = self.ENDPOINT_API.format(url=f"catalog/dataset/{dataset_id}")
+        response = requests.request("GET", url, verify=False)
 
+        response = response.json()['result']['items']
+        url = response[0]['distribution'][0]['accessURL']
+        print(url)
 
-def main():
-    pp = pprint.PrettyPrinter()
-    spapi = SpainOpenData()
-
-    result = spapi.catalog.dataset(_sort='title', _pageSize=1, _page=0)
-    pp.pprint(result)
-    result = spapi.catalog.dataset.l01281230_calidad_del_aire(_sort='title', _pageSize=10, _page=0)
-    pp.pprint(result)
-    # dataf = spapi.get_dataset(
-    #     dataset_id="u03400001-estudiantes-matriculados-en-estudios-oficiales")
-
-    # print(dataf)
-    pp = pprint.PrettyPrinter()
-    # pp.pprint(result)
-
-
-if __name__ == "__main__":
-    main()
+        self._download_dataset2(url)
