@@ -13,14 +13,9 @@ def main():
         "http://www.cis.es/cis/opencms/ES/formulario.jsp?dwld=/Microdatos/MD2626.zip"
     ]
 
+    downdata = DownloadDataset()
     for url in urls:
-        if DownloadDataset.is_downloadable(url):
-            print("Downloadable")
-            local_file = DownloadDataset.download(url)
-            print(local_file)
-        else:
-            print("NOT Downloadable")
-
+        downdata.download(url)
         print('-'*100)
 
 
