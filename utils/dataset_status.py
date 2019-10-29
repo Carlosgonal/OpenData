@@ -24,17 +24,20 @@ def main():
                 distribution = distribution[0]
 
             url = distribution.get('accessURL', '')
-            if downdata.is_downloadable(url):
+            type_download = downdata.get_type_download(url)
+            if downdata.is_downloadable(type_download=type_download):
                 status = DOWNLOADABLE
             else:
                 status = NOTDOWNLOADABLE
 
             row = {
+                'page': page,
                 'id': i,
                 'title': dataset['title'],
                 'url': url,
                 'keyword': dataset.get('keyword', ''),
-                'status': status
+                'status': status,
+                'type_download': type_download,
             }
             data.append(row)
             print(f"Page: {page} {i+1}/100", flush=True)
