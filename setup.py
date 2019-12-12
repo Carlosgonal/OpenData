@@ -10,7 +10,7 @@ setuptools.setup(
     name="opendata",
     version="0.0.1",
     author="Carlos González Álvarez",
-    author_email="carlos.gonla@gmail.com",
+    author_email="carlosgonal@gmail.com",
     description="A small example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
