@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 deps_path = os.path.abspath(os.path.join(__file__, os.pardir, os.pardir))
 
 setuptools.setup(
-    name="SpainOpenData",
+    name="opendata",
     version="0.0.1",
     author="Carlos González Álvarez",
     author_email="carlos.gonla@gmail.com",

@@ -1,0 +1,1 @@
+from .france import FranceOpenData
