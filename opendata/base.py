@@ -31,9 +31,6 @@ class BaseOpenDataAPI():
         9: 'nine'
     }
 
-    # for k,v in d.iteritems():
-    #   address = address.upper().replace(k, v)
-
     def __init__(self, *args, **kwargs):    
 
         self._path = []
