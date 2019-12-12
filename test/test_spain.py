@@ -1,6 +1,7 @@
 
 import pprint
-from SpainOpenData import SpainOpenData
+from opendata.spain import SpainOpenData
+
 
 def main():
     pp = pprint.PrettyPrinter()
