@@ -8,4 +8,3 @@ class FranceOpenData(BaseOpenDataAPI):
 
     def clean_results(self, json_dict):
         return json_dict['data']
-

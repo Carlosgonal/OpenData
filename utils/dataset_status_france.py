@@ -2,6 +2,7 @@
 import pandas as pd
 from opendata.france import FranceOpenData
 from opendata.download import DownloadDataset
+from opendata.elastic import Elastic
 
 DOWNLOADABLE = 1
 NOTDOWNLOADABLE = 0
@@ -57,5 +58,17 @@ def main():
         print('*'*100)
 
 
+def main2():
+    frapi = FranceOpenData()
+    elastic = Elastic()
+
+    for page in range(0, 1000):
+        datasets = frapi.datasets(sort='title', pageSize=100, page=page)
+        for i, dataset in enumerate(datasets):
+            elastic.save_document('open_france', dataset, dataset['id'])
+
+            print(f"Page: {page} {i+1}/100", flush=True)
+
+
 if __name__ == "__main__":
-    main()
+    main2()

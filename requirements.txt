@@ -1,2 +1,4 @@
 tqdm
 datapackage
+elasticsearch
+bs4
