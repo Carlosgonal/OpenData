@@ -31,7 +31,8 @@ class Elastic:
         try:
             self.elastic.create(index=index, id=id_doc,
                                 doc_type=doc_type,
-                                body=doc)
+                                body=doc,
+                                ignore=409)
 
         except Exception as error:
             if self.logger:

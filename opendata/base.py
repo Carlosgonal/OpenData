@@ -31,26 +31,28 @@ class BaseOpenDataAPI():
         9: 'nine'
     }
 
-    def __init__(self, *args, **kwargs):    
+    def __init__(self, *args, **kwargs):
 
         self._path = []
         self._call_name = ''
 
     def __getattr__(self, name):
-        name = name.replace('_', '-')
+        name = name.replace('__', '-')
         self._path.append(name)
         self._call_name = name
 
         return self
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, body={}, *args, **kwargs):
         """Callable for the object
         """
         parametes = [f'{key}={value}' for key, value in kwargs.items()]
-        url = "/".join(self._path) + '?' + "&".join(parametes)
+        url = "/".join(self._path)
+        if parametes:
+            url += '?' + "&".join(parametes)
         url = self.ENDPOINT_API.format(url=url)
 
-        response = requests.request("GET", url, verify=False)
+        response = requests.request("GET", url, json=body, verify=False)
 
         if not response.ok:
             attribute = self._path[-1]
